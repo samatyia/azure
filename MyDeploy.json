@@ -1,0 +1,76 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "outputs": {},
+  "parameters": {
+    "resLocation": {
+      "type": "string"
+    },
+    "storName": {
+      "type": "string"
+    },
+    "vnetName": {
+      "type": "string"
+    },
+    "vnetPrefix": {
+      "type": "string"
+    },
+    "vsubnet1Name": {
+      "type": "string"
+    },
+    "vsubnet1Prefix": {
+      "type": "string"
+    },
+    "vsubnet2Name": {
+      "type": "string"
+    },
+    "vsubnet2Prefix": {
+      "type": "string"
+    }
+  },
+    "resources": [
+      {
+        "apiVersion": "2016-01-01",
+        "kind": "Storage",
+        "location": "[parameters('resLocation')]",
+        "name": "[parameters('storName')]",
+        "properties": {},
+        "sku": {
+          "name": "Standard_LRS"
+        },
+        "tags": {},
+        "type": "Microsoft.Storage/storageAccounts"
+      },
+      {
+        "apiVersion": "2017-06-01",
+        "dependsOn": [],
+        "location": "[parameters('resLocation')]",
+        "name": "[parameters('vnetName')]",
+        "properties": {
+          "addressSpace": {
+            "addressPrefixes": [
+              "[parameters('vnetPrefix')]"
+            ]
+          },
+          "subnets": [
+            {
+              "name": "[parameters('vsubnet1Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('vsubnet1Prefix')]"
+              }
+            },
+            {
+              "name": "[parameters('vsubnet2Name')]",
+              "properties": {
+                "addressPrefix": "[parameters('vsubnet2Prefix')]"
+              }
+            }
+          ]
+        },
+        "tags": {
+          "displayName": "[parameters('vnetName')]"
+        },
+        "type": "Microsoft.Network/virtualNetworks"
+      }
+    ]
+  }
