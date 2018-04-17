@@ -1,0 +1,55 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "outputs": {},
+  "parameters": {
+    "resLocation": {
+      "type": "string"
+    },
+    "storName": {
+      "type": "string"
+    },
+    "vnetName": {
+      "type": "string"
+    },
+    "vnetPrefix": {
+      "type": "string"
+    },
+    "vsubnet1Name": {
+      "type": "string"
+    },
+    "vsubnet1Prefix": {
+      "type": "string"
+    },
+    "vsubnet2Name": {
+      "type": "string"
+    },
+    "vsubnet2Prefix": {
+      "type": "string"
+    }
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-05-10",
+      "name": "StorageAndNetwork",
+      "properties": {
+        "mode": "Incremental",
+        "parameters": {
+          "resLocation": { "value": "[parameters('resLocation')]" },
+          "storName": { "value": "[parameters('storName')]" },
+          "vnetName": { "value": "[parameters('vnetName')]" },
+          "vnetPrefix": { "value": "[parameters('vnetPrefix')]" },
+          "vsubnet1Name": { "value": "[parameters('vsubnet1Name')]" },
+          "vsubnet1Prefix": { "value": "[parameters('vsubnet1Prefix')]" },
+          "vsubnet2Name": { "value": "[parameters('vsubnet2Name')]" },
+          "vsubnet2Prefix": { "value": "[parameters('vsubnet2Prefix')]" }
+        },
+        "templateLink": {
+          "uri": "https://raw.githubusercontent.com/samatyia/azure/master/MyDeploy.json",
+          "contentVersion": "1.0.0.0"
+        }
+      },
+      "type": "Microsoft.Resources/deployments"
+    }
+  ]
+}
