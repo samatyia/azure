@@ -1,0 +1,41 @@
+{
+  "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "contentVersion": "1.0.0.0",
+  "outputs": {},
+  "parameters": {
+    "turi": { "type": "string" },
+    "muri": { "type": "string" }
+  },
+  "resources": [
+    {
+      "apiVersion": "2017-05-10",
+      "name": "T4",
+      "properties": {
+        "mode": "Incremental",
+        "templateLink": {
+          "uri": "[parameters('turi')]",
+          "contentVersion": "1.0.0.0"
+        },       
+        "parameters":  {
+            "adminPassword": {
+              "reference": {
+                "keyVault": {
+                  "id": "/subscriptions/9682d130-27b7-403d-b12a-d5fc563d83b3/resourceGroups/blob/providers/Microsoft.KeyVault/vaults/myvault1973"
+                },
+                "secretName": "adminPassword"
+              }
+            },
+            "adminUsername": { "value": "myadm" },
+            "configurationFunction": { "value": "myWebsite.ps1\\myWebsite" },
+            "imageSKU": { "value": "2016-Datacenter" },
+            "storageAccountName": { "value": "mysa1973" },
+            "storageAccountType": { "value": "Standard_LRS" },
+            "vmName": { "value": "myvm" },
+            "vmSize": { "value": "Standard_A2" },
+            "modulesurl": { "value": "[parameters('muri')]" }
+        }
+      },
+      "type": "Microsoft.Resources/deployments"
+    }
+  ]
+}
